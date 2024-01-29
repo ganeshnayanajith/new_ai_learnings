@@ -14,3 +14,9 @@ import plotly.express as px
 import re
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+
+import pandas as pd
+
+df = pd.read_csv('BigBasket Products.csv', index_col='index')
+print(df.shape)
+print(df.head())
