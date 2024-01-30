@@ -31,7 +31,6 @@ print('-' * 30)
 
 # returns the number of rows in the DataFrame
 print(f'df.shape[0] : {df.shape[0]}')
-
 print('-' * 30)
 
 for col in df.columns:
@@ -43,9 +42,25 @@ print('-' * 30)
 
 df = df.dropna()
 print(df.shape)
-
 print('-' * 30)
 
 print(df.dtypes)
+print('-' * 30)
 
+counts = df['category'].value_counts()
+
+print(counts)
+print('-' * 30)
+
+count_percentage = df['category'].value_counts(1) * 100
+
+print(df['category'].value_counts(1))
+print('-' * 30)
+
+print(count_percentage)
+print('-' * 30)
+
+counts_df = pd.DataFrame(
+    {'Category': counts.index, 'Counts': counts.values, 'Percent': np.round(count_percentage.values, 2)})
+print(counts_df)
 print('-' * 30)
