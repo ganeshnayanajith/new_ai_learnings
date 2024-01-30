@@ -64,3 +64,13 @@ counts_df = pd.DataFrame(
     {'Category': counts.index, 'Counts': counts.values, 'Percent': np.round(count_percentage.values, 2)})
 print(counts_df)
 print('-' * 30)
+
+fig = px.bar(data_frame=counts_df,
+             x='Category',
+             y='Counts',
+             color='Counts',
+             color_continuous_scale='blues',
+             text_auto=True,
+             title=f'Count of Items in Each Category')
+
+fig.write_html("chart.html")
