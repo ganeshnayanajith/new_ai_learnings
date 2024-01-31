@@ -92,25 +92,25 @@ print('Top 10 sub_category')
 print(counts_df.head(10))
 print('Bottom 10 sub_category')
 print(counts_df.tail(10))
-fig = px.bar(data_frame=counts_df[:10],
-             x='sub_category',
-             y='Counts',
-             color='Counts',
-             color_continuous_scale='blues',
-             text_auto=True,
-             title=f'Top 10 Bought Sub_Categories')
-
-fig.write_html("Top 10 Bought Sub_Categories.html")
-
-fig = px.bar(data_frame=counts_df[-10:],
-             x='sub_category',
-             y='Counts',
-             color='Counts',
-             color_continuous_scale='blues',
-             text_auto=True,
-             title=f'Bottom 10 Bought Sub_Categories')
-
-fig.write_html("Bottom 10 Bought Sub_Categories.html")
+# fig = px.bar(data_frame=counts_df[:10],
+#              x='sub_category',
+#              y='Counts',
+#              color='Counts',
+#              color_continuous_scale='blues',
+#              text_auto=True,
+#              title=f'Top 10 Bought Sub_Categories')
+#
+# fig.write_html("Top 10 Bought Sub_Categories.html")
+#
+# fig = px.bar(data_frame=counts_df[-10:],
+#              x='sub_category',
+#              y='Counts',
+#              color='Counts',
+#              color_continuous_scale='blues',
+#              text_auto=True,
+#              title=f'Bottom 10 Bought Sub_Categories')
+#
+# fig.write_html("Bottom 10 Bought Sub_Categories.html")
 
 column = 'brand'
 counts = df[column].value_counts()
@@ -130,12 +130,12 @@ print('Top 10 ' + str(column))
 print(counts_df.head(10))
 print('Bottom 10 ' + str(column))
 print(counts_df.tail(10))
-fig = px.bar(data_frame=counts_df.head(10),
-             x=column,
-             y='Counts',
-             color='Counts',
-             color_continuous_scale='blues',
-             text_auto=True,
-             title=f'Top 10 Brand Items based on Item Counts')
-
-fig.write_html("Top 10 Brand Items based on Item Counts.html")
+# fig = px.bar(data_frame=counts_df.head(10),
+#              x=column,
+#              y='Counts',
+#              color='Counts',
+#              color_continuous_scale='blues',
+#              text_auto=True,
+#              title=f'Top 10 Brand Items based on Item Counts')
+#
+# fig.write_html("Top 10 Brand Items based on Item Counts.html")
