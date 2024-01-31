@@ -111,3 +111,31 @@ fig = px.bar(data_frame=counts_df[-10:],
              title=f'Bottom 10 Bought Sub_Categories')
 
 fig.write_html("Bottom 10 Bought Sub_Categories.html")
+
+column = 'brand'
+counts = df[column].value_counts()
+
+print(counts)
+print('-' * 30)
+
+count_percentage = df[column].value_counts(1) * 100
+
+print(count_percentage)
+print('-' * 30)
+
+counts_df = pd.DataFrame(
+    {column: counts.index, 'Counts': counts.values, 'Percent': np.round(count_percentage.values, 2)})
+print('unique ' + str(column) + ' values', df['sub_category'].nunique())
+print('Top 10 ' + str(column))
+print(counts_df.head(10))
+print('Bottom 10 ' + str(column))
+print(counts_df.tail(10))
+fig = px.bar(data_frame=counts_df.head(10),
+             x=column,
+             y='Counts',
+             color='Counts',
+             color_continuous_scale='blues',
+             text_auto=True,
+             title=f'Top 10 Brand Items based on Item Counts')
+
+fig.write_html("Top 10 Brand Items based on Item Counts")
