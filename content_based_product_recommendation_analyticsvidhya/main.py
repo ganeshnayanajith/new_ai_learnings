@@ -138,4 +138,4 @@ fig = px.bar(data_frame=counts_df.head(10),
              text_auto=True,
              title=f'Top 10 Brand Items based on Item Counts')
 
-fig.write_html("Top 10 Brand Items based on Item Counts")
+fig.write_html("Top 10 Brand Items based on Item Counts.html")
