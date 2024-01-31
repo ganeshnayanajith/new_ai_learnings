@@ -65,15 +65,15 @@ counts_df = pd.DataFrame(
 print(counts_df)
 print('-' * 30)
 
-fig = px.bar(data_frame=counts_df,
-             x='Category',
-             y='Counts',
-             color='Counts',
-             color_continuous_scale='blues',
-             text_auto=True,
-             title=f'Count of Items in Each Category')
-
-fig.write_html("Count of Items in Each Category.html")
+# fig = px.bar(data_frame=counts_df,
+#              x='Category',
+#              y='Counts',
+#              color='Counts',
+#              color_continuous_scale='blues',
+#              text_auto=True,
+#              title=f'Count of Items in Each Category')
+#
+# fig.write_html("Count of Items in Each Category.html")
 
 counts = df['sub_category'].value_counts()
 
@@ -125,9 +125,10 @@ print('-' * 30)
 
 counts_df = pd.DataFrame(
     {column: counts.index, 'Counts': counts.values, 'Percent': np.round(count_percentage.values, 2)})
-print('unique ' + str(column) + ' values', df['sub_category'].nunique())
+print('unique ' + str(column) + ' values', df[column].nunique())
 print('Top 10 ' + str(column))
 print(counts_df.head(10))
+print(counts_df[counts_df['Counts'] == 1].shape)
 print('Bottom 10 ' + str(column))
 print(counts_df.tail(10))
 # fig = px.bar(data_frame=counts_df.head(10),
@@ -139,3 +140,23 @@ print(counts_df.tail(10))
 #              title=f'Top 10 Brand Items based on Item Counts')
 #
 # fig.write_html("Top 10 Brand Items based on Item Counts.html")
+
+
+column = 'type'
+counts = df[column].value_counts()
+count_percentage = df[column].value_counts(1) * 100
+counts_df = pd.DataFrame(
+    {column: counts.index, 'Counts': counts.values, 'Percent': np.round(count_percentage.values, 2)})
+print('unique ' + str(column) + ' values', df[column].nunique())
+print('Top 10 ' + str(column))
+print(counts_df.head(10))
+print(counts_df[counts_df['Counts'] == 1].shape)
+fig = px.bar(data_frame=counts_df.head(10),
+             x='type',
+             y='Counts',
+             color='Counts',
+             color_continuous_scale='blues',
+             text_auto=True,
+             title=f'Top 10 Types of Products based on Item Counts')
+
+fig.write_html("Top 10 Types of Products based on Item Counts.html")
