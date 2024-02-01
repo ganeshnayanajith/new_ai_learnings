@@ -151,12 +151,24 @@ print('unique ' + str(column) + ' values', df[column].nunique())
 print('Top 10 ' + str(column))
 print(counts_df.head(10))
 print(counts_df[counts_df['Counts'] == 1].shape)
-fig = px.bar(data_frame=counts_df.head(10),
-             x='type',
-             y='Counts',
-             color='Counts',
-             color_continuous_scale='blues',
-             text_auto=True,
-             title=f'Top 10 Types of Products based on Item Counts')
+# fig = px.bar(data_frame=counts_df.head(10),
+#              x='type',
+#              y='Counts',
+#              color='Counts',
+#              color_continuous_scale='blues',
+#              text_auto=True,
+#              title=f'Top 10 Types of Products based on Item Counts')
+#
+# fig.write_html("Top 10 Types of Products based on Item Counts.html")
 
-fig.write_html("Top 10 Types of Products based on Item Counts.html")
+print(df['rating'].describe())
+print('-' * 30)
+
+df['rating'].hist(bins=10)
+
+# plt.show()
+
+result = pd.cut(df.rating, bins=[0, 1, 2, 3, 4, 5]).reset_index().groupby(['rating'], observed=False).size()
+
+print(result)
+print('-' * 30)
