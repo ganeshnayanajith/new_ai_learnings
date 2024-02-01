@@ -172,3 +172,17 @@ result = pd.cut(df.rating, bins=[0, 1, 2, 3, 4, 5]).reset_index().groupby(['rati
 
 print(result)
 print('-' * 30)
+
+df['discount'] = (df['market_price'] - df['sale_price']) * 100 / df['market_price']
+print(df['discount'].describe())
+print('-' * 30)
+
+result = pd.cut(df.discount, bins=[-1, 0, 10, 20, 30, 40, 50, 60, 80, 90, 100]).reset_index().groupby(
+    ['discount'], observed=False).size()
+
+print(result)
+print('-' * 30)
+
+df['discount'].hist()
+
+# plt.show()
