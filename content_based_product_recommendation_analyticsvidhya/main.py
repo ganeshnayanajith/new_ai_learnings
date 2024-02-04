@@ -186,3 +186,6 @@ print('-' * 30)
 df['discount'].hist()
 
 # plt.show()
+
+ax = df.plot.scatter(x='rating', y='discount')
+# plt.show()
