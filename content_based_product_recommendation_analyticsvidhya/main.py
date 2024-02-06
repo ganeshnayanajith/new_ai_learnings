@@ -227,3 +227,12 @@ def recommend_most_popular(col, col_value, top_n=5):
 
 print(recommend_most_popular(col='category', col_value='Beauty & Hygiene'))
 print('-' * 30)
+
+print(recommend_most_popular(col='sub_category', col_value='Hair Care'))
+print('-' * 30)
+
+print(recommend_most_popular(col='brand', col_value='Amul'))
+print('-' * 30)
+
+print(recommend_most_popular(col='type', col_value='Face Care'))
+print('-' * 30)
