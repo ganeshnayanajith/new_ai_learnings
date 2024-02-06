@@ -15,8 +15,6 @@ import re
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-import pandas as pd
-
 df = pd.read_csv('BigBasket Products.csv', index_col='index')
 print(df.shape)
 print(df.head())
@@ -189,3 +187,43 @@ df['discount'].hist()
 
 ax = df.plot.scatter(x='rating', y='discount')
 # plt.show()
+
+
+df2 = df.copy()
+rmv_spc = lambda a: a.strip()
+get_list = lambda a: list(map(rmv_spc, re.split('& |, |\*|n', a)))
+
+for col in ['category', 'sub_category', 'type']:
+    df2[col] = df2[col].apply(get_list)
+
+
+def cleaner(x):
+    if isinstance(x, list):
+        return [str.lower(i.replace(" ", "")) for i in x]
+    else:
+        if isinstance(x, str):
+            return str.lower(x.replace(" ", ""))
+        else:
+            return ''
+
+
+for col in ['category', 'sub_category', 'type', 'brand']:
+    df2[col] = df2[col].apply(cleaner)
+
+
+def couple(x):
+    return ' '.join(x['category']) + ' ' + ' '.join(x['sub_category']) + ' ' + x['brand'] + ' ' + ' '.join(x['type'])
+
+
+df2['product_classification_features'] = df2.apply(couple, axis=1)
+
+print(df2['product_classification_features'].head())
+print('-' * 30)
+
+
+def recommend_most_popular(col, col_value, top_n=5):
+    return df[df[col] == col_value].sort_values(by='rating', ascending=False).head(top_n)[['product', col, 'rating']]
+
+
+print(recommend_most_popular(col='category', col_value='Beauty & Hygiene'))
+print('-' * 30)
