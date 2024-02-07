@@ -236,3 +236,43 @@ print('-' * 30)
 
 print(recommend_most_popular(col='type', col_value='Face Care'))
 print('-' * 30)
+
+count = CountVectorizer(stop_words='english')
+count_matrix = count.fit_transform(df2['product_classification_features'])
+cosine_sim = cosine_similarity(count_matrix, count_matrix)
+
+print('cosine_sim')
+print(cosine_sim)
+print('-' * 30)
+
+cosine_sim_df = pd.DataFrame(cosine_sim)
+
+print('cosine_sim_df')
+print(cosine_sim_df)
+print('-' * 30)
+
+
+def content_recommendation_v1(title):
+    a = df2.copy().reset_index().drop('index', axis=1)
+    index = a[a['product'] == title].index[0]
+    top_n_index = list(cosine_sim_df[index].nlargest(10).index)
+    try:
+        top_n_index.remove(index)
+    except:
+        pass
+    similar_df = a.iloc[top_n_index][['product']]
+    similar_df['cosine_similarity'] = cosine_sim_df[index].iloc[top_n_index]
+    return similar_df
+
+
+title = 'Water Bottle - Orange'
+result = content_recommendation_v1(title)
+print('result')
+print(result)
+print('-' * 30)
+
+title = 'Dark Chocolate- 55% Rich In Cocoa'
+result = content_recommendation_v1(title)
+print('result')
+print(result)
+print('-' * 30)
