@@ -20,3 +20,6 @@ print(manhattan_distance)
 
 jaccard_distance = distance.cdist(count_vect_df, count_vect_df, metric='jaccard').astype('double')
 print(jaccard_distance)
+
+cosine_similarity = 1 - distance.cdist(count_vect_df, count_vect_df, metric='cosine').round(2)
+print(cosine_similarity)
