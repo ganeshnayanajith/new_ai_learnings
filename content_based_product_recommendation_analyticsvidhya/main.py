@@ -239,6 +239,11 @@ print('-' * 30)
 
 count = CountVectorizer(stop_words='english')
 count_matrix = count.fit_transform(df2['product_classification_features'])
+
+print('count_matrix')
+print(count_matrix)
+print('-' * 30)
+
 cosine_sim = cosine_similarity(count_matrix, count_matrix)
 
 print('cosine_sim')
@@ -273,6 +278,46 @@ print('-' * 30)
 
 title = 'Dark Chocolate- 55% Rich In Cocoa'
 result = content_recommendation_v1(title)
+print('result')
+print(result)
+print('-' * 30)
+
+count2 = CountVectorizer(stop_words='english', lowercase=True)
+count_matrix2 = count2.fit_transform(df2['product'])
+cosine_sim2 = cosine_similarity(count_matrix2, count_matrix2)
+cosine_sim_df2 = pd.DataFrame(cosine_sim2)
+
+
+def content_recommendation_v2(title):
+    a = df2.copy().reset_index().drop('index', axis=1)
+    index = a[a['product'] == title].index[0]
+    similar_basis_metric_1 = cosine_sim_df[cosine_sim_df[index] > 0][index].reset_index().rename(
+        columns={index: 'sim_1'})
+    similar_basis_metric_2 = cosine_sim_df2[cosine_sim_df2[index] > 0][index].reset_index().rename(
+        columns={index: 'sim_2'})
+    similar_df = similar_basis_metric_1.merge(similar_basis_metric_2, how='left').merge(a[['product']].reset_index(),
+                                                                                        how='left')
+    similar_df['sim'] = similar_df[['sim_1', 'sim_2']].fillna(0).mean(axis=1)
+    similar_df = similar_df[similar_df['index'] != index].sort_values(by='sim', ascending=False)
+    return similar_df[['product', 'sim']].head(10)
+
+
+title = 'Water Bottle - Orange'
+result = content_recommendation_v2(title)
+print('result')
+print(result)
+print('-' * 30)
+
+title = 'Dark Chocolate- 55% Rich In Cocoa'
+result = content_recommendation_v2(title)
+
+print('result')
+print(result)
+print('-' * 30)
+
+title = 'Nacho Round Chips'
+result = content_recommendation_v2(title)
+
 print('result')
 print(result)
 print('-' * 30)
