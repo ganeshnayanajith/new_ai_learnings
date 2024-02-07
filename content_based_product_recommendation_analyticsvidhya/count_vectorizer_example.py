@@ -11,3 +11,12 @@ X = vectorizer.fit_transform([s1, s2, s3])
 X.toarray()
 count_vect_df = pd.DataFrame(X.toarray(), columns=vectorizer.get_feature_names_out())
 print(count_vect_df)
+
+euclidean_distance = distance.cdist(count_vect_df, count_vect_df, metric='euclidean').round(2)
+print(euclidean_distance)
+
+manhattan_distance = distance.cdist(count_vect_df, count_vect_df, metric='cityblock').astype('int')
+print(manhattan_distance)
+
+jaccard_distance = distance.cdist(count_vect_df, count_vect_df, metric='jaccard').astype('double')
+print(jaccard_distance)
