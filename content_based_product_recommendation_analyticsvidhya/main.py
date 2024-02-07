@@ -321,3 +321,17 @@ result = content_recommendation_v2(title)
 print('result')
 print(result)
 print('-' * 30)
+
+title = 'Chewy Mints - Lemon'
+result = content_recommendation_v2(title)
+
+print('result')
+print(result)
+print('-' * 30)
+
+title = 'Veggie - Fingers'
+result = content_recommendation_v2(title)
+
+print('result')
+print(result)
+print('-' * 30)
