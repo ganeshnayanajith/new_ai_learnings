@@ -5,89 +5,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 df = pd.read_csv('BigBasket Products.csv', index_col='index')
-print(df.shape)
-print(df.head())
-
-print('Null Data Count In Each Column')
-
-print(df.isnull().sum())
-
-print('Null Data % In Each Column')
-
-# returns the number of rows in the DataFrame
-print(f'df.shape[0] : {df.shape[0]}')
-
-for col in df.columns:
-    null_count = df[col].isnull().sum()
-    total_count = df.shape[0]
-    print("{} : {:.2f}".format(col, null_count / total_count * 100))
 
 df = df.dropna()
-print(df.shape)
-
-print(df.dtypes)
-
-counts = df['category'].value_counts()
-
-print(counts)
-
-count_percentage = df['category'].value_counts(1) * 100
-
-print(df['category'].value_counts(1))
-
-print(count_percentage)
-
-counts_df = pd.DataFrame(
-    {'Category': counts.index, 'Counts': counts.values, 'Percent': np.round(count_percentage.values, 2)})
-print(counts_df)
-
-counts = df['sub_category'].value_counts()
-
-print(counts)
-
-count_percentage = df['sub_category'].value_counts(1) * 100
-
-print(count_percentage)
-
-counts_df = pd.DataFrame(
-    {'sub_category': counts.index, 'Counts': counts.values, 'Percent': np.round(count_percentage.values, 2)})
-print('unique sub_category values', df['sub_category'].nunique())
-print('Top 10 sub_category')
-print(counts_df.head(10))
-print('Bottom 10 sub_category')
-print(counts_df.tail(10))
-
-column = 'brand'
-counts = df[column].value_counts()
-
-print(counts)
-
-count_percentage = df[column].value_counts(1) * 100
-
-print(count_percentage)
-
-counts_df = pd.DataFrame(
-    {column: counts.index, 'Counts': counts.values, 'Percent': np.round(count_percentage.values, 2)})
-print('unique ' + str(column) + ' values', df[column].nunique())
-print('Top 10 ' + str(column))
-print(counts_df.head(10))
-print(counts_df[counts_df['Counts'] == 1].shape)
-print('Bottom 10 ' + str(column))
-print(counts_df.tail(10))
-
-column = 'type'
-counts = df[column].value_counts()
-count_percentage = df[column].value_counts(1) * 100
-counts_df = pd.DataFrame(
-    {column: counts.index, 'Counts': counts.values, 'Percent': np.round(count_percentage.values, 2)})
-print('unique ' + str(column) + ' values', df[column].nunique())
-print('Top 10 ' + str(column))
-print(counts_df.head(10))
-print(counts_df[counts_df['Counts'] == 1].shape)
-
-result = df['rating'].describe()
-
-df['rating'].hist(bins=10)
 
 result = pd.cut(df.rating, bins=[0, 1, 2, 3, 4, 5]).reset_index().groupby(['rating'], observed=False).size()
 
