@@ -8,18 +8,6 @@ df = pd.read_csv('BigBasket Products.csv', index_col='index')
 
 df = df.dropna()
 
-result = pd.cut(df.rating, bins=[0, 1, 2, 3, 4, 5]).reset_index().groupby(['rating'], observed=False).size()
-
-df['discount'] = (df['market_price'] - df['sale_price']) * 100 / df['market_price']
-result = df['discount'].describe()
-
-result = pd.cut(df.discount, bins=[-1, 0, 10, 20, 30, 40, 50, 60, 80, 90, 100]).reset_index().groupby(
-    ['discount'], observed=False).size()
-
-df['discount'].hist()
-
-ax = df.plot.scatter(x='rating', y='discount')
-
 df2 = df.copy()
 rmv_spc = lambda a: a.strip()
 get_list = lambda a: list(map(rmv_spc, re.split('& |, |\*|n', a)))
@@ -47,8 +35,6 @@ def couple(x):
 
 
 df2['product_classification_features'] = df2.apply(couple, axis=1)
-
-result = df2['product_classification_features'].head()
 
 
 def recommend_most_popular(col, col_value, top_n=5):
