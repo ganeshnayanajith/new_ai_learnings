@@ -42,12 +42,20 @@ def recommend_most_popular(col, col_value, top_n=5):
 
 
 result = recommend_most_popular(col='category', col_value='Beauty & Hygiene')
+print(result)
+print('-' * 30)
 
 result = recommend_most_popular(col='sub_category', col_value='Hair Care')
+print(result)
+print('-' * 30)
 
 result = recommend_most_popular(col='brand', col_value='Amul')
+print(result)
+print('-' * 30)
 
 result = recommend_most_popular(col='type', col_value='Face Care')
+print(result)
+print('-' * 30)
 
 count = CountVectorizer(stop_words='english')
 count_matrix = count.fit_transform(df2['product_classification_features'])
@@ -72,9 +80,13 @@ def content_recommendation_v1(title):
 
 title = 'Water Bottle - Orange'
 result = content_recommendation_v1(title)
+print(result)
+print('-' * 30)
 
 title = 'Dark Chocolate- 55% Rich In Cocoa'
 result = content_recommendation_v1(title)
+print(result)
+print('-' * 30)
 
 count2 = CountVectorizer(stop_words='english', lowercase=True)
 count_matrix2 = count2.fit_transform(df2['product'])
@@ -98,15 +110,25 @@ def content_recommendation_v2(title):
 
 title = 'Water Bottle - Orange'
 result = content_recommendation_v2(title)
+print(result)
+print('-' * 30)
 
 title = 'Dark Chocolate- 55% Rich In Cocoa'
 result = content_recommendation_v2(title)
+print(result)
+print('-' * 30)
 
 title = 'Nacho Round Chips'
 result = content_recommendation_v2(title)
+print(result)
+print('-' * 30)
 
 title = 'Chewy Mints - Lemon'
 result = content_recommendation_v2(title)
+print(result)
+print('-' * 30)
 
 title = 'Veggie - Fingers'
 result = content_recommendation_v2(title)
+print(result)
+print('-' * 30)
