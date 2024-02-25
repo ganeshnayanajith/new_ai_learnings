@@ -30,6 +30,8 @@ for col in ['category', 'sub_category', 'type', 'brand']:
     df2[col] = df2[col].apply(cleaner)
 
 
+#################################################################################################
+
 def couple(x):
     return ' '.join(x['category']) + ' ' + ' '.join(x['sub_category']) + ' ' + x['brand'] + ' ' + ' '.join(x['type'])
 
@@ -56,6 +58,8 @@ print('-' * 30)
 result = recommend_most_popular(col='type', col_value='Face Care')
 print(result)
 print('-' * 30)
+
+#################################################################################################
 
 count = CountVectorizer(stop_words='english')
 count_matrix = count.fit_transform(df2['product_classification_features'])
